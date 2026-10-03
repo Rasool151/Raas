@@ -1,0 +1,1594 @@
+<!DOCTYPE html><html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>پرسشنامه سبک دلبستگی بزرگسال (RAAS)</title>
+
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"
+>
+
+<style>
+    :root {
+        --primary: #4a90e2;
+        --primary-dark: #357abd;
+        --primary-light: #eef6ff;
+
+        --success: #16845b;
+        --danger: #c53030;
+
+        --bg: #f4f7f9;
+        --card: #ffffff;
+        --text: #263238;
+        --muted: #667085;
+        --border: #dfe4ea;
+
+        --radius: 12px;
+        --shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        padding: 16px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+        line-height: 1.8;
+    }
+
+    button,
+    input {
+        font-family: inherit;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 820px;
+        margin: 0 auto;
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 24px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 24px;
+        padding-bottom: 18px;
+        border-bottom: 2px solid var(--primary);
+    }
+
+    h1 {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 1.35rem;
+        line-height: 1.7;
+    }
+
+    .instructions {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+        text-align: justify;
+    }
+
+    .notice {
+        margin-top: 16px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        background: #fff8e6;
+        color: #72510b;
+        font-size: 0.84rem;
+        text-align: right;
+    }
+
+    /* Progress */
+
+    .progress-wrapper {
+        margin-bottom: 24px;
+    }
+
+    .progress-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        font-size: 0.85rem;
+        color: var(--muted);
+    }
+
+    .progress-bar {
+        height: 8px;
+        background: #e8edf2;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    .progress-value {
+        height: 100%;
+        width: 0;
+        background: var(--primary);
+        border-radius: inherit;
+        transition: width 0.25s ease;
+    }
+
+    /* Questions */
+
+    .question-block {
+        margin: 0 0 18px;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: #fff;
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .question-block.unanswered {
+        border-color: var(--danger);
+        box-shadow: 0 0 0 3px rgba(197, 48, 48, 0.08);
+    }
+
+    .question-text {
+        margin: 0 0 14px;
+        padding: 0;
+        font-weight: 600;
+        font-size: 0.96rem;
+    }
+
+    .question-number {
+        color: var(--primary);
+        font-weight: 800;
+    }
+
+    .options {
+        display: grid;
+        gap: 8px;
+    }
+
+    .option-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 44px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s ease;
+    }
+
+    .option-label:hover {
+        background: #f5f9fd;
+    }
+
+    .option-label:focus-within {
+        background: #eef6ff;
+        outline: 2px solid rgba(74, 144, 226, 0.25);
+    }
+
+    .option-label input {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+        accent-color: var(--primary);
+    }
+
+    /* Actions */
+
+    .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 24px;
+    }
+
+    .btn {
+        border: 0;
+        border-radius: 9px;
+        padding: 13px 16px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+            background 0.2s ease,
+            transform 0.1s ease;
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+    .btn-primary {
+        background: var(--primary);
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-dark);
+    }
+
+    .btn-secondary {
+        background: #edf1f5;
+        color: #344054;
+    }
+
+    .btn-secondary:hover {
+        background: #e2e7ec;
+    }
+
+    .btn:focus-visible {
+        outline: 3px solid rgba(74, 144, 226, 0.3);
+        outline-offset: 2px;
+    }
+
+    /* Error */
+
+    .error-msg {
+        display: none;
+        margin: 14px 0 0;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: #fff1f1;
+        color: var(--danger);
+        font-size: 0.88rem;
+        text-align: center;
+    }
+
+    /* Result */
+
+    .result-container {
+        display: none;
+        margin-top: 28px;
+        padding: 20px;
+        background: var(--primary-light);
+        border-radius: var(--radius);
+        border-right: 5px solid var(--primary);
+    }
+
+    .result-container.visible {
+        display: block;
+    }
+
+    .result-title {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 1.2rem;
+    }
+
+    .result-intro {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 0.85rem;
+    }
+
+    .score-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .score-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 14px;
+        text-align: center;
+    }
+
+    .score-card-title {
+        color: #344054;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .score-direction {
+        min-height: 42px;
+        color: var(--muted);
+        font-size: 0.72rem;
+        line-height: 1.6;
+    }
+
+    .score-card-value {
+        margin-top: 6px;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary);
+    }
+
+    .score-card-average {
+        color: var(--muted);
+        font-size: 0.76rem;
+        margin-top: 2px;
+    }
+
+    .profile-box {
+        background: #fff;
+        border-radius: 10px;
+        padding: 16px;
+    }
+
+    .profile-name {
+        margin: 0 0 8px;
+        font-size: 1.08rem;
+        color: #243b53;
+    }
+
+    .profile-desc {
+        margin: 0;
+        color: #4a5568;
+        font-size: 0.9rem;
+    }
+
+    .result-note {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        h1 {
+            font-size: 1.15rem;
+        }
+
+        .score-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .actions {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            transition: none !important;
+        }
+    }
+</style>
+
+</head><body><div class="container"><header>
+    <h1>
+        پرسشنامه سبک دلبستگی بزرگسال (RAAS)
+    </h1>
+
+    <p class="instructions">
+        هر عبارت را با دقت بخوانید و مشخص کنید تا چه اندازه با تجربه و
+        احساس شما در روابط با دیگران مطابقت دارد. بهتر است بر اساس
+        اولین پاسخ طبیعی خود پاسخ دهید و بیش از حد روی هر عبارت فکر نکنید.
+    </p>
+
+    <div class="notice">
+        این پرسشنامه یک ابزار خودارزیابی است و نتیجه آن به‌تنهایی
+        تشخیص روان‌شناختی یا بالینی محسوب نمی‌شود.
+    </div>
+</header>
+
+
+<!-- Progress -->
+
+<div class="progress-wrapper" aria-live="polite">
+
+    <div class="progress-info">
+        <span id="progress-text">
+            0 از 18 سؤال پاسخ داده شده
+        </span>
+
+        <span id="progress-percent">
+            0٪
+        </span>
+    </div>
+
+    <div
+        class="progress-bar"
+        id="progress-bar"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0">
+
+        <div
+            class="progress-value"
+            id="progress-value">
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Form -->
+
+<form id="raas-form" novalidate>
+
+    <div id="questions-container"></div>
+
+    <div class="actions">
+
+        <button
+            type="submit"
+            class="btn btn-primary">
+            مشاهده نتیجه
+        </button>
+
+        <button
+            type="button"
+            class="btn btn-secondary"
+            id="reset-btn">
+            شروع دوباره
+        </button>
+
+    </div>
+
+    <p
+        class="error-msg"
+        id="error-msg"
+        role="alert">
+
+        لطفاً به همه سؤال‌ها پاسخ دهید.
+
+    </p>
+
+</form>
+
+
+<!-- Results -->
+
+<section
+    class="result-container"
+    id="result-container"
+    aria-labelledby="result-title">
+
+    <h2
+        class="result-title"
+        id="result-title">
+
+        نتیجه ارزیابی
+
+    </h2>
+
+    <p class="result-intro">
+        نمره‌های زیر مربوط به سه بُعد پرسشنامه هستند.
+        در «نزدیکی» و «وابستگی»، نمره بالاتر نشان‌دهنده
+        میزان بیشتر این ویژگی است؛ در «اضطراب رابطه‌ای»،
+        نمره بالاتر نشان‌دهنده نگرانی بیشتر در روابط است.
+    </p>
+
+    <div
+        class="score-grid"
+        id="scores-display">
+    </div>
+
+    <div class="profile-box">
+
+        <h3
+            class="profile-name"
+            id="profile-name">
+        </h3>
+
+        <p
+            class="profile-desc"
+            id="profile-desc">
+        </p>
+
+    </div>
+
+    <p class="result-note">
+        میانگین هر سؤال از ۱ تا ۵ محاسبه شده است.
+        این نتیجه صرفاً توصیفی است و نباید به‌عنوان
+        تشخیص قطعی یا جایگزین ارزیابی متخصص سلامت روان
+        در نظر گرفته شود.
+    </p>
+
+</section>
+
+</div><script>
+(function () {
+
+    "use strict";
+
+
+    /*
+     * =========================================================
+     * داده‌های پرسشنامه
+     * =========================================================
+     *
+     * مهم:
+     * متن سؤال‌ها، خرده‌مقیاس‌ها و آیتم‌های معکوس باید با
+     * نسخه معتبر RAAS مورد استفاده شما تطبیق داده شوند.
+     *
+     * reverse:
+     * false = نمره مستقیم
+     * true  = نمره معکوس
+     *
+     * برای مقیاس 1 تا 5:
+     * نمره معکوس = 6 - پاسخ
+     */
+
+    var questions = [
+
+        {
+            id: 1,
+            text: "ایجاد ارتباط با دیگران برایم آسان است.",
+            subscale: "close",
+            reverse: false
+        },
+
+        {
+            id: 2,
+            text: "مشکل است که به خودم اجازه دهم به دیگران وابسته باشم.",
+            subscale: "depend",
+            reverse: true
+        },
+
+        {
+            id: 3,
+            text: "در روابطم اغلب نگرانم که طرف مقابل واقعاً دوستم نداشته باشد.",
+            subscale: "anxiety",
+            reverse: false
+        },
+
+        {
+            id: 4,
+            text: "آن‌قدر که من دوست دارم به دیگران نزدیک شوم، دیگران به اندازه من تمایل به این ارتباط ندارند.",
+            subscale: "anxiety",
+            reverse: false
+        },
+
+        {
+            id: 5,
+            text: "دوست دارم به دیگران متکی باشم.",
+            subscale: "depend",
+            reverse: false
+        },
+
+        {
+            id: 6,
+            text: "از اینکه کسی به من نزدیک شود ناراحت نمی‌شوم.",
+            subscale: "close",
+            reverse: false
+        },
+
+        {
+            id: 7,
+            text: "فکر می‌کنم وقتی به دیگران احتیاج دارم، هیچ‌گاه در دسترس نیستند.",
+            subscale: "depend",
+            reverse: true
+        },
+
+        {
+            id: 8,
+            text: "از اینکه به مردم نزدیک باشم راحت نیستم.",
+            subscale: "close",
+            reverse: true
+        },
+
+        {
+            id: 9,
+            text: "در روابطم اغلب نگرانم که طرف مقابل نخواهد ارتباطش را با من ادامه دهد.",
+            subscale: "anxiety",
+            reverse: false
+        },
+
+        {
+            id: 10,
+            text: "وقتی احساساتم را به دیگران نشان می‌دهم، می‌ترسم که آنها همان احساس را درباره من نداشته باشند.",
+            subscale: "anxiety",
+            reverse: false
+        },
+
+        {
+            id: 11,
+            text: "در ارتباطاتم اغلب از خود می‌پرسم آیا طرف مقابل واقعاً به من توجه دارد.",
+            subscale: "anxiety",
+            reverse: false
+        },
+
+        {
+            id: 12,
+            text: "به راحتی می‌توانم با دیگران روابط دوستانه نزدیک برقرار کنم.",
+            subscale: "close",
+            reverse: false
+        },
+
+        {
+            id: 13,
+            text: "وقتی کسی خیلی با من صمیمی می‌شود، عصبی می‌شوم.",
+            subscale: "close",
+            reverse: true
+        },
+
+        {
+            id: 14,
+            text: "می‌دانم وقتی به دیگران نیاز داشته باشم، آنها در دسترس خواهند بود.",
+            subscale: "depend",
+            reverse: false
+        },
+
+        {
+            id: 15,
+            text: "دلم می‌خواهد به مردم نزدیک شوم اما می‌ترسم به من صدمه بزنند.",
+            subscale: "anxiety",
+            reverse: false
+        },
+
+        {
+            id: 16,
+            text: "فکر می‌کنم دشوار است که آدم به دیگران کاملاً اعتماد کند.",
+            subscale: "depend",
+            reverse: true
+        },
+
+        {
+            id: 17,
+            text: "اغلب مردم می‌خواهند با من صمیمی‌تر از آن حدی بشوند که من احساس راحتی می‌کنم.",
+            subscale: "close",
+            reverse: true
+        },
+
+        {
+            id: 18,
+            text: "مطمئن نیستم که بتوانم به افرادی تکیه کنم که به هنگام نیاز در دسترس باشند.",
+            subscale: "depend",
+            reverse: true
+        }
+
+    ];
+
+
+    /*
+     * گزینه‌های پاسخ
+     */
+
+    var options = [
+
+        {
+            value: 1,
+            label: "کاملاً مخالفم"
+        },
+
+        {
+            value: 2,
+            label: "تا حدودی مخالفم"
+        },
+
+        {
+            value: 3,
+            label: "نه مخالفم نه موافق"
+        },
+
+        {
+            value: 4,
+            label: "تا حدودی موافقم"
+        },
+
+        {
+            value: 5,
+            label: "کاملاً موافقم"
+        }
+
+    ];
+
+
+    /*
+     * اطلاعات خرده‌مقیاس‌ها
+     *
+     * نکته:
+     * تعداد سؤال‌ها از خود آرایه questions محاسبه می‌شود
+     * و hard-code نشده است.
+     */
+
+    var subscaleInfo = {
+
+        close: {
+            title: "نزدیکی",
+            direction: "نمره بالاتر = راحتی بیشتر با نزدیکی"
+        },
+
+        depend: {
+            title: "وابستگی",
+            direction: "نمره بالاتر = اتکای بیشتر به دیگران"
+        },
+
+        anxiety: {
+            title: "اضطراب رابطه‌ای",
+            direction: "نمره بالاتر = نگرانی بیشتر در روابط"
+        }
+
+    };
+
+
+    /*
+     * عناصر DOM
+     */
+
+    var form =
+        document.getElementById("raas-form");
+
+    var questionsContainer =
+        document.getElementById("questions-container");
+
+    var errorMsg =
+        document.getElementById("error-msg");
+
+    var resultContainer =
+        document.getElementById("result-container");
+
+    var resetButton =
+        document.getElementById("reset-btn");
+
+
+    /*
+     * =========================================================
+     * توابع کمکی
+     * =========================================================
+     */
+
+
+    /*
+     * جایگزین سازگارتر برای closest()
+     *
+     * برای پشتیبانی بهتر از مرورگرهای قدیمی،
+     * به‌جای Element.closest از حرکت در parentElement
+     * استفاده می‌کنیم.
+     */
+
+    function findQuestionBlock(element) {
+
+        var current = element;
+
+        while (current) {
+
+            if (
+                current.classList &&
+                current.classList.contains("question-block")
+            ) {
+                return current;
+            }
+
+            current = current.parentElement;
+        }
+
+        return null;
+    }
+
+
+    /*
+     * تعداد سؤال‌های هر خرده‌مقیاس
+     */
+
+    function getSubscaleItemCount(subscale) {
+
+        var count = 0;
+
+        for (var i = 0; i < questions.length; i++) {
+
+            if (questions[i].subscale === subscale) {
+                count++;
+            }
+
+        }
+
+        return count;
+    }
+
+
+    /*
+     * بیشترین نمره ممکن خرده‌مقیاس
+     */
+
+    function getSubscaleMaximum(subscale) {
+
+        return getSubscaleItemCount(subscale) * 5;
+
+    }
+
+
+    /*
+     * ایجاد یک سؤال
+     */
+
+    function createQuestion(question) {
+
+        var block =
+            document.createElement("fieldset");
+
+        block.className =
+            "question-block";
+
+        block.setAttribute(
+            "data-question-id",
+            question.id
+        );
+
+
+        var legend =
+            document.createElement("legend");
+
+        legend.className =
+            "question-text";
+
+
+        var number =
+            document.createElement("span");
+
+        number.className =
+            "question-number";
+
+        number.textContent =
+            question.id + ". ";
+
+
+        legend.appendChild(number);
+
+        legend.appendChild(
+            document.createTextNode(question.text)
+        );
+
+
+        var optionsContainer =
+            document.createElement("div");
+
+        optionsContainer.className =
+            "options";
+
+
+        for (var i = 0; i < options.length; i++) {
+
+            var option =
+                options[i];
+
+            var label =
+                document.createElement("label");
+
+            label.className =
+                "option-label";
+
+
+            var input =
+                document.createElement("input");
+
+            input.type =
+                "radio";
+
+            input.name =
+                "q" + question.id;
+
+            input.value =
+                option.value;
+
+
+            label.appendChild(input);
+
+            label.appendChild(
+                document.createTextNode(
+                    option.label
+                )
+            );
+
+
+            optionsContainer.appendChild(label);
+        }
+
+
+        block.appendChild(legend);
+
+        block.appendChild(optionsContainer);
+
+
+        return block;
+    }
+
+
+    /*
+     * نمایش تمام سؤال‌ها
+     */
+
+    function renderQuestions() {
+
+        questionsContainer.innerHTML = "";
+
+        for (var i = 0; i < questions.length; i++) {
+
+            questionsContainer.appendChild(
+                createQuestion(questions[i])
+            );
+
+        }
+
+    }
+
+
+    /*
+     * تعداد پاسخ‌های ثبت‌شده
+     */
+
+    function getAnsweredCount() {
+
+        var count = 0;
+
+        for (var i = 0; i < questions.length; i++) {
+
+            var selected =
+                form.querySelector(
+                    'input[name="q' +
+                    questions[i].id +
+                    '"]:checked'
+                );
+
+            if (selected) {
+                count++;
+            }
+
+        }
+
+        return count;
+    }
+
+
+    /*
+     * بروزرسانی progress
+     */
+
+    function updateProgress() {
+
+        var answered =
+            getAnsweredCount();
+
+        var total =
+            questions.length;
+
+        var percent =
+            Math.round(
+                (answered / total) * 100
+            );
+
+
+        document.getElementById(
+            "progress-text"
+        ).textContent =
+            answered +
+            " از " +
+            total +
+            " سؤال پاسخ داده شده";
+
+
+        document.getElementById(
+            "progress-percent"
+        ).textContent =
+            percent + "٪";
+
+
+        document.getElementById(
+            "progress-value"
+        ).style.width =
+            percent + "%";
+
+
+        document.getElementById(
+            "progress-bar"
+        ).setAttribute(
+            "aria-valuenow",
+            percent
+        );
+
+    }
+
+
+    /*
+     * اعتبارسنجی
+     */
+
+    function validateForm() {
+
+        var valid = true;
+
+        var firstUnanswered = null;
+
+
+        for (var i = 0; i < questions.length; i++) {
+
+            var question =
+                questions[i];
+
+            var block =
+                form.querySelector(
+                    '[data-question-id="' +
+                    question.id +
+                    '"]'
+                );
+
+
+            var selected =
+                form.querySelector(
+                    'input[name="q' +
+                    question.id +
+                    '"]:checked'
+                );
+
+
+            if (!selected) {
+
+                valid = false;
+
+                block.classList.add(
+                    "unanswered"
+                );
+
+
+                if (!firstUnanswered) {
+                    firstUnanswered = block;
+                }
+
+            } else {
+
+                block.classList.remove(
+                    "unanswered"
+                );
+
+            }
+
+        }
+
+
+        return {
+            valid: valid,
+            firstUnanswered: firstUnanswered
+        };
+
+    }
+
+
+    /*
+     * محاسبه نمره خرده‌مقیاس‌ها
+     */
+
+    function calculateScores() {
+
+        var scores = {
+            close: 0,
+            depend: 0,
+            anxiety: 0
+        };
+
+
+        for (var i = 0; i < questions.length; i++) {
+
+            var question =
+                questions[i];
+
+
+            var selected =
+                form.querySelector(
+                    'input[name="q' +
+                    question.id +
+                    '"]:checked'
+                );
+
+
+            if (!selected) {
+                continue;
+            }
+
+
+            var value =
+                Number(selected.value);
+
+
+            /*
+             * Reverse scoring:
+             *
+             * 1 -> 5
+             * 2 -> 4
+             * 3 -> 3
+             * 4 -> 2
+             * 5 -> 1
+             */
+
+            if (question.reverse) {
+                value = 6 - value;
+            }
+
+
+            scores[question.subscale] +=
+                value;
+
+        }
+
+
+        return scores;
+
+    }
+
+
+    /*
+     * محاسبه میانگین
+     */
+
+    function calculateAverages(scores) {
+
+        var averages = {};
+
+        for (var key in subscaleInfo) {
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    subscaleInfo,
+                    key
+                )
+            ) {
+
+                var count =
+                    getSubscaleItemCount(key);
+
+                averages[key] =
+                    count > 0
+                        ? scores[key] / count
+                        : 0;
+
+            }
+
+        }
+
+        return averages;
+
+    }
+
+
+    /*
+     * =========================================================
+     * تفسیر توصیفی
+     * =========================================================
+     *
+     * این قسمت عمداً به‌عنوان «تشخیص» یا تعیین قطعی
+     * یک سبک دلبستگی نوشته نشده است.
+     *
+     * آستانه‌های تفسیری باید بر اساس هنجارهای معتبر
+     * نسخه مورد استفاده تنظیم شوند.
+     */
+
+    function interpretProfile(averages) {
+
+        var anxiety =
+            averages.anxiety;
+
+        var close =
+            averages.close;
+
+        var depend =
+            averages.depend;
+
+
+        var title;
+        var description;
+
+
+        if (anxiety >= 3.5) {
+
+            title =
+                "اضطراب رابطه‌ای بالاتر";
+
+            description =
+                "پاسخ‌های شما در بُعد اضطراب رابطه‌ای " +
+                "نمره بالاتری نشان می‌دهد. این می‌تواند " +
+                "با نگرانی بیشتر درباره پذیرش، طرد شدن " +
+                "یا میزان علاقه دیگران همراه باشد.";
+
+        }
+
+        else if (
+            close >= 3.5 &&
+            depend >= 3.5 &&
+            anxiety <= 2.5
+        ) {
+
+            title =
+                "راحتی بیشتر با صمیمیت و اتکا";
+
+            description =
+                "پاسخ‌های شما نشان‌دهنده راحتی نسبتاً " +
+                "بیشتر با نزدیکی عاطفی و امکان اتکا به " +
+                "دیگران، همراه با نگرانی رابطه‌ای کمتر است.";
+
+        }
+
+        else if (close <= 2.5) {
+
+            title =
+                "راحتی کمتر با صمیمیت";
+
+            description =
+                "پاسخ‌های شما نشان می‌دهد که ممکن است " +
+                "در برخی موقعیت‌ها با نزدیکی عاطفی یا " +
+                "صمیمیت زیاد احساس راحتی کمتری داشته باشید.";
+
+        }
+
+        else {
+
+            title =
+                "پروفایل میانه";
+
+            description =
+                "نمرات شما در این ابعاد عمدتاً در محدوده " +
+                "میانی قرار دارند. این می‌تواند نشان دهد " +
+                "که تجربه شما از روابط بسته به فرد یا " +
+                "موقعیت متفاوت است.";
+
+        }
+
+
+        return {
+            title: title,
+            description: description
+        };
+
+    }
+
+
+    /*
+     * ایجاد کارت نتیجه
+     */
+
+    function createScoreCard(
+        subscale,
+        score,
+        average
+    ) {
+
+        var info =
+            subscaleInfo[subscale];
+
+
+        var card =
+            document.createElement("div");
+
+        card.className =
+            "score-card";
+
+
+        var title =
+            document.createElement("div");
+
+        title.className =
+            "score-card-title";
+
+        title.textContent =
+            info.title;
+
+
+        var direction =
+            document.createElement("div");
+
+        direction.className =
+            "score-direction";
+
+        direction.textContent =
+            info.direction;
+
+
+        var value =
+            document.createElement("div");
+
+        value.className =
+            "score-card-value";
+
+        value.textContent =
+            score +
+            " از " +
+            getSubscaleMaximum(subscale);
+
+
+        var averageElement =
+            document.createElement("div");
+
+        averageElement.className =
+            "score-card-average";
+
+        averageElement.textContent =
+            "میانگین هر سؤال: " +
+            average.toFixed(2);
+
+
+        card.appendChild(title);
+
+        card.appendChild(direction);
+
+        card.appendChild(value);
+
+        card.appendChild(averageElement);
+
+
+        return card;
+
+    }
+
+
+    /*
+     * نمایش نتیجه
+     */
+
+    function displayResults(scores) {
+
+        var averages =
+            calculateAverages(scores);
+
+
+        var profile =
+            interpretProfile(averages);
+
+
+        var display =
+            document.getElementById(
+                "scores-display"
+            );
+
+
+        display.innerHTML = "";
+
+
+        var order = [
+            "close",
+            "depend",
+            "anxiety"
+        ];
+
+
+        for (var i = 0; i < order.length; i++) {
+
+            var key =
+                order[i];
+
+
+            display.appendChild(
+                createScoreCard(
+                    key,
+                    scores[key],
+                    averages[key]
+                )
+            );
+
+        }
+
+
+        document.getElementById(
+            "profile-name"
+        ).textContent =
+            profile.title;
+
+
+        document.getElementById(
+            "profile-desc"
+        ).textContent =
+            profile.description;
+
+
+        resultContainer.classList.add(
+            "visible"
+        );
+
+
+        resultContainer.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    /*
+     * Reset
+     */
+
+    function resetForm() {
+
+        form.reset();
+
+
+        var blocks =
+            form.querySelectorAll(
+                ".question-block"
+            );
+
+
+        for (
+            var i = 0;
+            i < blocks.length;
+            i++
+        ) {
+
+            blocks[i].classList.remove(
+                "unanswered"
+            );
+
+        }
+
+
+        errorMsg.style.display =
+            "none";
+
+
+        resultContainer.classList.remove(
+            "visible"
+        );
+
+
+        document.getElementById(
+            "scores-display"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "profile-name"
+        ).textContent = "";
+
+
+        document.getElementById(
+            "profile-desc"
+        ).textContent = "";
+
+
+        updateProgress();
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /*
+     * =========================================================
+     * Event Listeners
+     * =========================================================
+     */
+
+
+    /*
+     * تغییر پاسخ
+     */
+
+    form.addEventListener(
+        "change",
+        function (event) {
+
+            if (
+                event.target &&
+                event.target.type === "radio"
+            ) {
+
+                /*
+                 * به‌جای closest() از تابع سازگار
+                 * با مرورگرهای قدیمی استفاده می‌کنیم.
+                 */
+
+                var block =
+                    findQuestionBlock(
+                        event.target
+                    );
+
+
+                if (block) {
+
+                    block.classList.remove(
+                        "unanswered"
+                    );
+
+                }
+
+
+                errorMsg.style.display =
+                    "none";
+
+
+                updateProgress();
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Submit
+     */
+
+    form.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            var validation =
+                validateForm();
+
+
+            if (!validation.valid) {
+
+                errorMsg.style.display =
+                    "block";
+
+
+                if (
+                    validation.firstUnanswered
+                ) {
+
+                    validation
+                        .firstUnanswered
+                        .scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                }
+
+
+                return;
+
+            }
+
+
+            errorMsg.style.display =
+                "none";
+
+
+            var scores =
+                calculateScores();
+
+
+            displayResults(scores);
+
+        }
+    );
+
+
+    /*
+     * Reset
+     */
+
+    resetButton.addEventListener(
+        "click",
+        resetForm
+    );
+
+
+    /*
+     * شروع برنامه
+     */
+
+    renderQuestions();
+
+    updateProgress();
+
+
+})();
+</script></body>
+</html>
